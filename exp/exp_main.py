@@ -346,8 +346,8 @@ class Exp_Main(Exp_Basic):
 
         preds = np.array(preds)
         preds = np.concatenate(preds, axis=0)
-        if (pred_data.scale):
-            preds = pred_data.inverse_transform(preds)
+        # if (pred_data.scale):
+        #     preds = pred_data.inverse_transform(preds)
         
         # result save
         folder_path = './results/' + setting + '/'
