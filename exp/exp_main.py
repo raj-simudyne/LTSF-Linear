@@ -5,7 +5,7 @@ from utils.tools import EarlyStopping, adjust_learning_rate, visual, test_params
 from utils.metrics import metric
 
 import numpy as np
-import pandas as pd
+import pandas as pds
 import torch
 import torch.nn as nn
 from torch import optim
@@ -282,24 +282,25 @@ class Exp_Main(Exp_Basic):
         trues = np.concatenate(trues, axis=0)
         inputx = np.concatenate(inputx, axis=0)
 
-        # result save
+        # mae, mse, rmse, mape, mspe, rse, corr = metric(preds, trues)
+        # print('mse:{}, mae:{}'.format(mse, mae))
+        # f = open("result.txt", 'a')
+        # f.write(setting + "  \n")
+        # f.write('mse:{}, mae:{}, rse:{}, corr:{}'.format(mse, mae, rse, corr))
+        # f.write('\n')
+        # f.write('\n')
+        # f.close()
+
         folder_path = './results/' + setting + '/'
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        mae, mse, rmse, mape, mspe, rse, corr = metric(preds, trues)
-        print('mse:{}, mae:{}'.format(mse, mae))
-        f = open("result.txt", 'a')
-        f.write(setting + "  \n")
-        f.write('mse:{}, mae:{}, rse:{}, corr:{}'.format(mse, mae, rse, corr))
-        f.write('\n')
-        f.write('\n')
-        f.close()
-
         # np.save(folder_path + 'metrics.npy', np.array([mae, mse, rmse, mape, mspe,rse, corr]))
-        np.save(folder_path + 'pred.npy', preds)
-        # np.save(folder_path + 'true.npy', trues)
-        # np.save(folder_path + 'x.npy', inputx)
+
+        np.save(folder_path + 'test_predictions.npy', preds)
+        np.save(folder_path + 'test_ground_truth.npy', trues)
+        np.save(folder_path + 'test_input.npy', inputx)
+        
         return
 
     def predict(self, setting, load=False):
@@ -354,7 +355,7 @@ class Exp_Main(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        np.save(folder_path + 'real_prediction.npy', preds)
-        pd.DataFrame(np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1), columns=pred_data.cols).to_csv(folder_path + 'real_prediction.csv', index=False)
+        np.save(folder_path + 'future_predictions.npy', preds)
+        pds.DataFrame(np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1), columns=pred_data.cols).to_csv(folder_path + 'future_prediction.csv', index=False)
 
         return

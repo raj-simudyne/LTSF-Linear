@@ -3,8 +3,8 @@ if [ ! -d "./logs" ]; then
     mkdir ./logs
 fi
 
-if [ ! -d "./logs/linear_training" ]; then
-    mkdir ./logs/linear_training
+if [ ! -d "./logs/predictions" ]; then
+    mkdir ./logs/predictions
 fi
 
 seq_len=104
@@ -12,7 +12,7 @@ model_name=DLinear
 for pred_len in 24 36 48 60
 do
 python -u run_longExp.py \
-  --is_training 1 \
+  --is_training 0 \
   --root_path ./dataset/ \
   --data_path exchange_rate.csv \
   --model_id Exchange_$seq_len'_'$pred_len \
@@ -23,8 +23,7 @@ python -u run_longExp.py \
   --seq_len $seq_len \
   --pred_len $pred_len \
   --enc_in 8 \
-  --des 'Exp' \
-  --itr 1 --batch_size 8  --learning_rate 0.0005 >logs/linear_training/$model_name'_'Exchange_$seq_len'_'$pred_len.log 
+  --des 'Exp'
 done
 
 seq_len=104
@@ -32,7 +31,7 @@ model_name=NLinear
 for pred_len in 24 36 48 60
 do
 python -u run_longExp.py \
-  --is_training 1 \
+  --is_training 0 \
   --root_path ./dataset/ \
   --data_path exchange_rate.csv \
   --model_id Exchange_$seq_len'_'$pred_len \
@@ -43,8 +42,7 @@ python -u run_longExp.py \
   --seq_len $seq_len \
   --pred_len $pred_len \
   --enc_in 8 \
-  --des 'Exp' \
-  --itr 1 --batch_size 8 --learning_rate 0.0005 >logs/linear_training/$model_name'_'Exchange_$seq_len'_'$pred_len.log 
+  --des 'Exp'
 done
 
 seq_len=104
@@ -52,7 +50,7 @@ model_name=Linear
 for pred_len in 24 36 48 60
 do
 python -u run_longExp.py \
-  --is_training 1 \
+  --is_training 0 \
   --root_path ./dataset/ \
   --data_path exchange_rate.csv \
   --model_id Exchange_$seq_len'_'$pred_len \
@@ -63,6 +61,5 @@ python -u run_longExp.py \
   --seq_len $seq_len \
   --pred_len $pred_len \
   --enc_in 8 \
-  --des 'Exp' \
-  --itr 1 --batch_size 8 --learning_rate 0.0005 >logs/linear_training/$model_name'_'Exchange_$seq_len'_'$pred_len.log 
+  --des 'Exp'
 done
