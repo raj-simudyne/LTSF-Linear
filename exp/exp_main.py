@@ -355,7 +355,7 @@ class Exp_Main(Exp_Basic):
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
 
-        np.save(folder_path + 'future_predictions.npy', preds)
-        pds.DataFrame(np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1), columns=pred_data.cols).to_csv(folder_path + 'future_prediction.csv', index=False)
+        #np.save(folder_path + 'future_predictions.npy', preds)
+        pds.DataFrame(np.append(np.transpose([pred_data.future_dates]), preds[0], axis=1), columns=pred_data.cols).to_csv(folder_path + 'future_predictions.csv', index=False)
 
         return

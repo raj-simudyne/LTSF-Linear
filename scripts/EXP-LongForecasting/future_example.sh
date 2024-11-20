@@ -9,7 +9,7 @@ fi
 
 seq_len=104
 model_name=DLinear
-for pred_len in 24
+for pred_len in 24 36 48 60
 do
 python -u run_longExp.py \
   --is_training 0 \
@@ -29,7 +29,7 @@ done
 
 seq_len=104
 model_name=NLinear
-for pred_len in 24
+for pred_len in 24 36 48 60
 do
 python -u run_longExp.py \
   --is_training 0 \
@@ -49,7 +49,7 @@ done
 
 seq_len=104
 model_name=Linear
-for pred_len in 24
+for pred_len in 24 36 48 60
 do
 python -u run_longExp.py \
   --is_training 0 \
